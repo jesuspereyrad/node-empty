@@ -1,0 +1,24 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "Node container for Artificial Intelligence Department in GBM",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src/js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "cookie-parser": "^1.4.4",
+    "debug": "^4.1.1",
+    "eslint": "^6.8.0",
+    "http-errors": "^1.7.3",
+    "jade": "^1.11.0",
+    "mongoose": "^5.9.2",
+    "morgan": "^1.9.1"
+  }
+}
