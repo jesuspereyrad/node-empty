@@ -1,4 +1,4 @@
-const connector = require('../connector');
+const connector = require('../api');
 const assistant = connector.WatsonAssistantConnection();
 const CONFIG = require('../config');
 
