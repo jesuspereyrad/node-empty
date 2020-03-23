@@ -1,5 +1,5 @@
-import foodController from './foodModel.js';
-import userController from './userModel.js';
+import foodController from './foodController';
+import userController from './userController';
 
 /** Controller
  * 
