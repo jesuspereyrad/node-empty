@@ -37,3 +37,6 @@ This archive has all the different output structure required to present the resp
 ## Challenge
 
 Create a connector to handle the response with google dialog flow instead of watson assistant.
+
+## Facebook Documentation
+Please visit https://developers.facebook.com/docs/messenger-platform/introduction for more information
