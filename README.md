@@ -4,9 +4,9 @@ This is my base node project architecture to work with watson assistant and face
 
 ## Structure
 
-*src
-  **[controller](http://google.com)
-  **helpers
+* src
+  ** [controller](http://google.com)
+  ** helpers
   models
   routes
   services
