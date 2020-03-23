@@ -3,15 +3,36 @@
 The Facebook Messenger Connector. Can get messaes from your facebook page and send response to it by different
 mechanisims, like (bots, automatically response, etc)
 
-## The CONFIGJS FILE
+
+## STRUCTURE
+* facebook
+  * components
+  * controller
+  * routes
+  * services
+  * api.js
+  * config.js
+  * connector.js
+  * index.js
+
+## CONFIG.JS
 
 The only file that should be edited to let facebook works in your server.
+* Webhook configuration
+  * PAGE_ACCESS_TOKEN
+  * VERIFY_TOKEN
+  * FACEBOOK_URI
 
-## The Connector FILe
+## CONNECTOR.JS
 
 This file will let you connect facebook messenger with a chat-bot. The connector should be change thinking in as
 the only place where facebook api will know the what chat bot we will used. In the example we connect facebook
 messenger with Watson Assistant.
+
+## COMPONENTS ARCHIVE
+
+This archive has all the different output structure required to present the response in the Facebook Messenger. 
+
 
 ## Challenge
 
