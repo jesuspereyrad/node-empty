@@ -12,7 +12,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "ibm-watson": "^5.4.0"
+    "ibm-watson": "^5.4.0",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "cookie-parser": "^1.4.4",
