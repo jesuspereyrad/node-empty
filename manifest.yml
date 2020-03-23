@@ -1,0 +1,9 @@
+---
+health-check-type: process
+applications:
+- name: BI-CHAT-DEMO
+  command: npm start
+  path: .
+  disk_quota: 256MB
+  memory: 256MB
+  instances: 1
