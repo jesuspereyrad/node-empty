@@ -4,13 +4,13 @@ This is my base node project architecture to work with watson assistant and face
 
 ## Structure
 
-* src
-⋅⋅⋅ * [controller](http://google.com)
-... * helpers
-  models
-  routes
-  services
-  tests
-  utilities
-  watson (services)
-  facebook (services)
+* [src](/src)
+  * [controller](/src/controller)
+  * [helpers](/src/helpers)
+  * [models](/src/models)
+  * [routes](/src/routes)
+  * [services](/src/services)
+  * [tests](/src/test)
+  * [utilities](/src/utilities)
+  * [watson (services)](/src/watson)
+  * [facebook (services)](/src/facebook)
