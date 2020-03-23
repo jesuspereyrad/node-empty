@@ -18,15 +18,20 @@ watson version or watson authentication I am using.
   api.js
   index.js
   
-## CONFIG FILE
+  
+## API.JS  
+
+This file has the wrapper to connect with Watson Assistant using ibm-watson library
+  
+## CONFIG.JS
 
 Config File should be the only edit file.
 
-Authentication methods:
-  WATSON_ASSISTANT_URL;
-  WATSON_ASSISTANT_ID;
-  WATSON_ASSISTANT_PASSWORD;
-  ATSON_ASSISTANT_IAM_URL;
+* Authentication methods:
+  * WATSON_ASSISTANT_URL;
+  * WATSON_ASSISTANT_ID;
+  * WATSON_ASSISTANT_PASSWORD;
+  * ATSON_ASSISTANT_IAM_URL;
 
-Timeout variable
-  WATSON_ASSISTANT_TIMEOUT;
+* Timeout variable
+  * WATSON_ASSISTANT_TIMEOUT;
