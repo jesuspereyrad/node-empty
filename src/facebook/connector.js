@@ -16,6 +16,7 @@ const getResultByType = (response) => {
     text: result.text,
     option: ({title:result.title, options:result.options}),
     carousel: result,
+    pause: result,
   })
 }
 
