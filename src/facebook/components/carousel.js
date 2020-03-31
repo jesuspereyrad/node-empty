@@ -1,13 +1,11 @@
-//////////////////////////
-// Carousel template
-//////////////////////////
+const Button  = require('./button');
 
-const renderButton = (button) => ({
-    "type": button.type,
-    "url": button.url,
-    "title": button.title,
-})
-
+/**
+ * Template Carousel to send to Facebook graph API.
+ *
+ * @param   {Object}          carouselObject - The json with all the props for the carousel
+ * @returns {Object}
+ */
 const renderCard = (carouselObject) => ({
   title: carouselObject.title,
   image_url: carouselObject.image_url,
@@ -17,13 +15,10 @@ const renderCard = (carouselObject) => ({
       url: carouselObject.default_action.url,
       webview_height_ratio: "tall",
   },
-  buttons: carouselObject.button.map(button => renderButton(button))
+  buttons: carouselObject.button.map(button => Button[button.type](button))
 }) 
 
-module.exports = (recipientId, carouselObject) => ({
-    recipient:{
-        id: recipientId
-    },
+module.exports = (carouselObject) => ({
     message: {
         attachment: {
             type: "template",

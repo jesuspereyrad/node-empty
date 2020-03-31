@@ -1,49 +1,43 @@
 const urlHandle = require("../utils/urlHandle")
+const button = require('./button');
 
-
-
-const buttonAttachment = (url) => ({
-  "type": "web_url",
-  "url": url,
-  "title": "Mas info aqui",
-})
-
-const checkButton = (messageText) => {
-  const urls = urlHandle.getUrlsFromString(messageText);
-  if(urls && urls.length > 0) {
-    return textLinkTemplate(urlHandle.removeUrlFromString(messageText), urls)
-  }
-  return textTemplate(messageText);
-}
-
-//////////////////////////
-// Text Template
-//////////////////////////
-const textTemplate = (messageText) => ({
+/**
+ * Template text to send to Facebook graph API.
+ *
+ * @param   {string}          text - The text you want to send.
+ * @returns {Object}
+ */
+const textTemplate = (text) => ({
   message: {
-    text: messageText,
+    text,
   }
 })
 
-//////////////////////////
-// Text Link Template
-//////////////////////////
-const textLinkTemplate = (messageText, buttonList) => ({
+/**
+ * Template Image to send to Facebook graph API.
+ *
+ * @param   {string}          text - The text you want to send.
+ * @param   {Array[Object]}   buttonList - An array of element with structure data to render a button.
+ * @returns {Object}
+ */
+const textLinkTemplate = (text, buttonList) => ({
   message: {
     attachment: {
       type: "template",
       payload: {
         template_type: "button",
-        text: messageText,
-        buttons: buttonList.map(buttonAttachment)
+        text,
+        buttons: buttonList.map((url) => button['web_url']({title: "Mas info aqui", url: url}))
       }
     }
   }
 })
 
-module.exports = (recipientId, messageText) => ({
-  recipient: {
-    id: recipientId
-  },
-  ...checkButton(messageText)
-})
+module.exports = (messageText) => {
+  const urls = urlHandle.getUrlsFromString(messageText);
+  console.log("urls", urls);
+  if(urls && urls.length > 0) {
+    return textLinkTemplate(urlHandle.removeUrlFromString(messageText), urls)
+  }
+  return textTemplate(messageText);
+}

@@ -20,11 +20,8 @@ const renderCard = (carouselObject) => ({
   buttons: carouselObject.button.map(button => renderButton(button))
 }) 
 
-module.exports = (recipientId, carouselObject) => ({
-    recipient:{
-        id: recipientId
-    },
-    message:{
+module.exports = (carouselObject) => ({
+    message: {
         "attachment":{
             "type":"template",
             "payload":{

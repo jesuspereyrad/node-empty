@@ -12,3 +12,4 @@ exports.ASSISTANT_WORKSPACEID= process.env.ASSISTANT_WORKSPACEID;
 exports.VERIFY_TOKEN= process.env.VERIFY_TOKEN;
 exports.ASSISTANT_ID= process.env.WATSON_ASSISTANT_ID;
 exports.FACEBOOK_URI= process.env.FACEBOOK_URI;
+exports.LOGIN_URI= process.env.LOGIN_URI;

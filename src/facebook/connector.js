@@ -1,35 +1,56 @@
-const facebookApi = require('./api');
 const watsonServices = require('../watson/services');
-const helper = require("./components/helper");
+const components = require("./components");
 
-exports.verifySession = (session=undefined) => {
+/**
+ * Verify Session with Watson Assistant.
+ *
+ * @param   {String}          session - Session Id from Watson assistant
+ * @returns {String}
+ */
+const verifySession = (session=undefined) => {
   if(session !== undefined) {
     return session;
   } 
   return watsonServices.getSession()
 }
 
+/**
+ * Map the result from Watson Assistant to Facebook Messenger .
+ *
+ * @param   {String}          response - Watson json response
+ * @returns {Object}
+ */
 const getResultByType = (response) => {
   const result = response.result.output.generic[0];
+  console.log("result", result);
   return ({
     image: result.source,
     text: result.text,
     option: ({title:result.title, options:result.options}),
     carousel: result,
     pause: result,
+    suggestios: result,
   })
 }
 
-exports.sendToAssistant = (session, event) => {
+/**
+ * Send messages to the Facebook API.
+ *
+ * @param   {String}          sender_psid - Specific user id to send data to
+ * @param   {Object|Object[]} messageData - Payloads to send
+ * @returns {undefined}
+ */
+exports.getFacebookTemplate = (message) => {
+  const session = undefined;
   return new Promise((resolve, reject) => {
-    this.verifySession(session)
+    verifySession(session)
     .then((validSessionId) => {
-      console.log(event.message.text);
-      watsonServices.sendMessage(validSessionId.result.session_id, event.message.text, 'text')
+      console.log(message.text);
+      watsonServices.sendMessage(validSessionId.result.session_id, message.text, 'text')
       .then((response) => {
         console.log("response", response);
         const type = response.result.output.generic[0].response_type;
-        return resolve(facebookApi(helper(event, type, getResultByType(response)[type])))
+        return resolve(components[type](getResultByType(response)[type]))
       })
       .catch((err) => {
         console.log("err", err);
