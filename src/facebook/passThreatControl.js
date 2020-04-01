@@ -23,7 +23,7 @@ module.exports = (sender_psid, messageData) => {
     }
   
     request({
-      uri: `${CONFIG.FACEBOOK_URI}/pass_thread_control`,
+      uri: `https://graph.facebook.com/v6.0/me/pass_thread_control`,
       qs: { access_token: CONFIG.PAGE_ACCESS_TOKEN },
       method: 'POST',
       json: request_body

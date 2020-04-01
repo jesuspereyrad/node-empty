@@ -10,4 +10,7 @@ router.post('/api/message', watsonController.sendMessage);
 // // GET session for watson assistant.
 router.get('/api/session', watsonController.getSession);
 
+// webhooks
+router.post('/webhook', watsonController.getWebhook);
+
 module.exports = router;
