@@ -11,5 +11,9 @@ const userRoutes = require("./userRoutes");
 
 router.use('/user/', userRoutes);
 
+router.use('/test', function(req, res) {
+    console.log('asd', req.body.params)
+    res.status(200);
+})
 
 module.exports = router;

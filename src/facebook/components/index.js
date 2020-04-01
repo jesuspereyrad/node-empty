@@ -20,7 +20,7 @@ var sendLoginButton = require('./loginButton');
 
 module.exports = {
     text: sendText,
-    image: sendLoginButton,
+    image: sendImage,
     option: sendOption,
     carousel: sendCarousel,
     pause: sendPause,
