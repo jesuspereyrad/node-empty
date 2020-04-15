@@ -1,6 +1,7 @@
 var handleAccountLink = require('./handleAccountLink');
 var handleMessage = require('./handleMessage');
 var handlePostback = require('./handlePostback');
+var handleThreadControl = require('./handleThreadControl');
 
 
 /**
@@ -14,5 +15,6 @@ var handlePostback = require('./handlePostback');
 module.exports = {
     handleAccountLink,
     handleMessage,
-    handlePostback    
+    handlePostback,
+    handleThreadControl 
 }

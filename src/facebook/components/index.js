@@ -16,8 +16,6 @@ var sendLoginButton = require('./loginButton');
  * Read More at: https://developers.facebook.com/docs/messenger-platform/send-api-reference/templates
  */
 
-
-
 module.exports = {
     text: sendText,
     image: sendImage,
@@ -25,4 +23,6 @@ module.exports = {
     carousel: sendCarousel,
     pause: sendPause,
     suggestion: sendError,
+    error: sendError,
+    SingIn: sendLoginButton,
 }

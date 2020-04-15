@@ -3,7 +3,7 @@ const Button  = require('./button');
 /**
  * Template Carousel to send to Facebook graph API.
  *
- * @param   {Object}          carouselObject - The json with all the props for the carousel
+ * @param   {Object}          carouselObject - The structure with all the props for the carousel
  * @returns {Object}
  */
 const renderCard = (carouselObject) => ({
@@ -11,11 +11,11 @@ const renderCard = (carouselObject) => ({
   image_url: carouselObject.image_url,
   subtitle: carouselObject.subtitle,
   default_action: {
-      type: web_url,
+      type: carouselObject.default_action.type,
       url: carouselObject.default_action.url,
       webview_height_ratio: "tall",
   },
-  buttons: carouselObject.button.map(button => Button[button.type](button))
+  buttons: carouselObject.buttons.map(button => Button[button.type](button))
 }) 
 
 module.exports = (carouselObject) => ({

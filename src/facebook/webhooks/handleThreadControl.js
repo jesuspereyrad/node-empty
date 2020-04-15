@@ -12,12 +12,10 @@ const connector = require('../connector');
  * @param   {Object}          received_message - The payload from the request 
  * @returns {Array[String]}
  */
-module.exports = (sender_psid, received_message) => {
+module.exports = (sender_psid) => {
 
   // Check if the message contains text
-  if (received_message.text) {    
-    // Create the payload for a basic text message
-    connector.getFacebookTemplate(received_message, sender_psid)
+    connector.getFacebookTemplate({text: "Transferir a bot"}, sender_psid)
     .then((data) => {
       // Sends the response message
       return callSendAPI(sender_psid, data);    
@@ -26,5 +24,4 @@ module.exports = (sender_psid, received_message) => {
       const status = err.code !== undefined && err.code > 0 ? err.code : 500;
       return ({code: status, description: err});
     })
-  }  
 }

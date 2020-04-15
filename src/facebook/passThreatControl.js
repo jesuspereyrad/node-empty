@@ -13,7 +13,7 @@ const CONFIG = require('./config');
  * @param   {Object|Object[]} messageData - Payloads to send
  * @returns {undefined}
  */
-module.exports = (sender_psid, messageData) => {
+module.exports = (sender_psid) => {
     const request_body = {
       recipient: {
         id:sender_psid,
@@ -30,11 +30,8 @@ module.exports = (sender_psid, messageData) => {
   
     }, function (error, response, body) {
       if (!error && response.statusCode == 200) {
-        var recipientId = body.recipient_id;
-        var messageId = body.message_id;
   
-        console.log("Successfully sent generic message with id %s to recipient %s", 
-          messageId, recipientId);
+        console.log("Successfully pass thread", body);
       } else {
         console.error("Unable to send message.");
         console.error(response);

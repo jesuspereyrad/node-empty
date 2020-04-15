@@ -1,5 +1,5 @@
 const CONFIG = require('../config');
-const {handleMessage, handlePostback, handleAccountLink}  = require('../webhooks');
+const {handleMessage, handlePostback, handleAccountLink, handleThreadControl}  = require('../webhooks');
 
 // Incoming events handling
 
@@ -32,6 +32,16 @@ exports.sendMessage = (body) => {
     body.entry.forEach(function(entry) {
       // Iterate over each messaging event
 
+      if(entry && entry.standby) {
+        entry.standby.map(element => {
+          console.log("sender", element.sender)
+          console.log("recipient", element.recipient)
+          console.log("message", element.message)
+        })
+
+      }
+
+      if(entry && entry.messaging && entry.messaging[0]) { 
       // Gets the body of the webhook event
       let webhook_event = entry.messaging[0];
       console.log(webhook_event);
@@ -56,9 +66,13 @@ exports.sendMessage = (body) => {
       } else if (webhook_event.account_linking) { // eslint-disable-line camelcase, max-len
         handleAccountLink(sender_psid, webhook_event.account_linking);
         return ({code: (200), data: ('POSTBACK_RECEIVED')})
+      } else if (webhook_event.pass_thread_control) {
+        handleThreadControl(sender_psid, webhook_event.pass_thread_control)
+        return ({code: (200), data: ('PASS THREAD CONTROL RECEIVED')})
       } else {
-        return ({code: 403, err: `Webhook received unknown event: ${event}`});
+        return ({code: 403, err: `Webhook received unknown event: ${webhook_event}`});
       }
+    }
     });
   };
 };
