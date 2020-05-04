@@ -5,10 +5,10 @@ var router = express.Router();
 /// API WATSON ROUTES ///
 
 // Send Facebook messages
-router.post('/webhook', facebookController.messageController.sendMessage);
+router.post('/webhook', facebookController.messageController.receivedMessage);
 
 // Auth facebook app
-router.get('/webhook', facebookController.messageController.getMessage);
+router.get('/webhook', facebookController.messageController.validateWebhook);
 
 // Home facebook wrapper
 router.get('/', facebookController.homeController.home);

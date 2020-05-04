@@ -37,7 +37,7 @@ exports.getWebhook = (req, res) => {
   }, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       results = JSON.parse(body).results
-      console.log("Successfully sent generic message %s, body: %s", response, results.toString());
+      console.log("Successfully sent generic message %s, body: %s", response, results);
     } else {
       console.error("Unable to send message.");
       console.error(response);

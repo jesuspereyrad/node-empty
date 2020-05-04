@@ -18,9 +18,9 @@ module.exports = (sender_psid, received_message) => {
   if (received_message.text) {    
     // Create the payload for a basic text message
     connector.getFacebookTemplate(received_message, sender_psid)
-    .then((data) => {
-      // Sends the response message
-      return callSendAPI(sender_psid, data);    
+    .then((dataBatch) => {
+      console.log("databatch", JSON.stringify(dataBatch))
+      dataBatch.map(data => callSendAPI(sender_psid, data))
     })
     .catch((err) => {
       const status = err.code !== undefined && err.code > 0 ? err.code : 500;

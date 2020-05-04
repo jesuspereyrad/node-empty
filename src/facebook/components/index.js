@@ -6,6 +6,8 @@ var sendPause = require('../mock/pause');
 var sendLocation = require('../mock/location');
 var sendError = require('./error');
 var sendLoginButton = require('./loginButton');
+var {singleButton} = require('./button');
+var sendLink = require('./link');
 
 
 /**
@@ -25,4 +27,6 @@ module.exports = {
     suggestion: sendError,
     error: sendError,
     SingIn: sendLoginButton,
+    button: singleButton,
+    link: sendLink,
 }

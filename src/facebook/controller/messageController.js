@@ -7,8 +7,8 @@ const {messageService} = require('../services');
  * @param   {Response}         res - The response httml to the route
  * @returns {null}
  */
-exports.getMessage = (req, res) => {
-    messageService.getMessage({...req.query})
+exports.validateWebhook = (req, res) => {
+    messageService.validateWebhook({...req.query})
       .then((data) => res.status(200).send(data))
       .catch((err) => res.status(403).send(err))
 };
@@ -20,7 +20,7 @@ exports.getMessage = (req, res) => {
  * @param   {Response}         res - The response httml to the route
  * @returns {null}
  */
-exports.sendMessage = (req, res) => {
-    messageService.sendMessage(req.body)
+exports.receivedMessage = (req, res) => {
+    messageService.receivedMessage(req.body)
     res.sendStatus(200)
 }

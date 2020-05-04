@@ -40,8 +40,23 @@ const renderButton = ({title, payload}) => ({
     payload: JSON.stringify(...payload),
 })
 
+const renderSingleButton = (payload) => ({
+    message: {
+        attachment: {
+            type: "template",
+            payload: {
+                template_type: "button",
+                text: payload.text,
+                buttons: payload.buttonType === 'postback' ? payload.buttons.map(postbackButton) : payload.buttons.map(urlButton)
+            }
+        }
+    } 
+})
+
+
 module.exports = {
     text: renderButton,
     web_url: urlButton,
     postback: postbackButton,
+    singleButton: renderSingleButton,
 }

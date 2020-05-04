@@ -1,7 +1,7 @@
 ---
 health-check-type: process
 applications:
-- name: BI-CHAT-DEMO
+- name: BI-CHAT-DEMO-QA
   command: npm start
   path: .
   disk_quota: 256MB

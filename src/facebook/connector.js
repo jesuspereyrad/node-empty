@@ -21,8 +21,8 @@ const verifySession = (session=undefined) => {
  * @param   {String}          response - Watson json response
  * @returns {Object}
  */
-const getResultByType = (response) => {
-  const result = response.result.output.generic[0];
+const getResultByType = (result) => {
+  // const result = response.result.output.generic[0];
   const type = ({
     image: result.source,
     text: result.text,
@@ -31,27 +31,41 @@ const getResultByType = (response) => {
     pause: result,
     suggestios: result,
     error: result,
+    carousel: result.elements,
+    SingIn: result.text,
+    SingOut: ({title:result.title, options:result.options}),
+    PassThread: result,
+    button: result,
+    link: result,
   })
 
   return type[result.response_type];
 }
 
-/**
- * Map the result from Actions in Watson Assistant to Facebook Messenger .
- *
- * @param   {String}          response - Watson json response
- * @returns {Object}
- */
-const getResultByTypeAction = (result) => {
-  const actions =  ({
-    carousel: result.elements,
-    SingIn: result.text,
-    SingOut: ({title:result.title, options:result.options}),
-    PassThread: result,
-  })
+// /**
+//  * Map the result from Actions in Watson Assistant to Facebook Messenger .
+//  *
+//  * @param   {String}          response - Watson json response
+//  * @returns {Object}
+//  */
+// const getResultByTypeAction = (result) => {
+//   const actions =  ({
+//     carousel: result.elements,
+//     SingIn: result.text,
+//     SingOut: ({title:result.title, options:result.options}),
+//     PassThread: result,
+//     button: result,
+//     image: result.source,
+//     text: result.text,
+//     option: ({title:result.title, options:result.options}),
+//     carousel: result,
+//     pause: result,
+//     suggestios: result,
+//     error: result,
+//   })
 
-  return actions[result.response_type];
-}
+//   return actions[result.response_type];
+// }
 
 
 
@@ -70,17 +84,26 @@ exports.getFacebookTemplate = (message, sender_psid) => {
       console.log(message.text);
       watsonServices.sendMessage(validSessionId.result.session_id, message.text, 'text')
       .then((response) => {
-        if(response.result.output.user_defined && response.result.output.user_defined.actions !== undefined) {
-          const actions = response.result.output.user_defined.actions[0];
-          const type = actions.response_type;
-          return resolve(components[type](getResultByTypeAction(actions)))
-        } else {
-          if(response.result.output && response.result.output.generic[0] && response.result.output.generic[0].response_type) {
-            const type = response.result.output.generic[0].response_type;
-            return resolve(components[type](getResultByType(response)))
-          }
-          return resolve(components['error']())
+        console.log("responses", response)
+        if(response && response.components && response.components.length > 0) {
+          responses = response.components.map(component => components[component.response_type](getResultByType(component)))
+          return resolve(responses)
         }
+        // if(response.result.output.user_defined && response.result.output.user_defined.actions !== undefined) {
+        //   responses = response.result.output.user_defined.actions.map(action =>  components[action.response_type](getResultByType(action)))
+        //   // const actions = response.result.output.user_defined.actions[0];
+        //   // const type = actions.response_type;
+        //   // return resolve(components[type](getResultByTypeAction(action)))
+        //   console.log("responses", responses)
+        //   return resolve(responses)
+          
+        // } else {
+        //   if(response.result.output && response.result.output.generic[0] && response.result.output.generic[0].response_type) {
+        //     responses = response.result.output.generic.map(generic =>  components[generic.response_type](getResultByType(generic)))
+        //     return resolve(responses)
+        //   }
+        //   return resolve(components['error']())
+        // }
       })
       .catch((err) => {
         console.log("err", err);
